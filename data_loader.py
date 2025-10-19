@@ -1,51 +1,18 @@
 import pandas as pd
 
-FILE_ID = "1Tj8RQHUh7MTmE88paqDBqDJZ5Ru6mOtL"
-file_url = f"https://drive.google.com/uc?export=download&id={FILE_ID}"
+def parse_search_results(csv_file="../api_example/search_results.csv"):
+    # Загрузка CSV с результатами поиска
+    df = pd.read_csv(csv_file)
 
-try:
-    # Загружаем Titanic-csv (учёт кавычек и пробелов)
-    raw_data = pd.read_csv(
-        file_url,
-        sep=",",
-        quotechar='"',
-        skipinitialspace=True,
-        encoding="utf-8"
-    )
+    print(f"Всего результатов: {len(df)}")
+    print("Первые 10 строк:")
+    print(df[["position", "title", "link", "snippet"]].head(10))
 
-    print("Датасет успешно загружен.")
-    print(f"Размер датасета: {raw_data.shape[0]} строк, {raw_data.shape[1]} столбцов.")
+    # Фильтрация результатов с ключевым словом "chatgpt" в названии (игнорируем регистр)
+    filtered = df[df["title"].str.contains("chatgpt", case=False, na=False)]
 
-    print("\nПервые 10 строк датасета:")
-    print(raw_data.head(10))
+    print(f"\nОтфильтрованные результаты с 'chatgpt' в названии (всего {len(filtered)}):")
+    print(filtered[["position", "title", "link"]])
 
-    # === Приведение типов ===
-    df = raw_data.copy()
-
-    # Числовые с Int32 (nullable)
-    for col in ["PassengerId", "Survived", "Pclass", "SibSp", "Parch"]:
-        df[col] = pd.to_numeric(df[col], errors="coerce").astype("Int32")
-
-    # Вещественные
-    for col in ["Age", "Fare"]:
-        df[col] = pd.to_numeric(df[col], errors="coerce").astype("Float32")
-
-    # Текст/категории
-    df["Name"] = df["Name"].astype("string")
-    for col in ["Sex", "Ticket", "Cabin", "Embarked"]:
-        df[col] = df[col].astype("string").astype("category")
-
-    print("\nТипы после приведения:")
-    print(df.dtypes)
-
-    # === Сохранение ===
-    df.reset_index(drop=True).to_feather("train_converted.feather")
-    df.to_csv("train_converted.csv.gz", index=False, compression="gzip")
-
-    print("\nФайлы сохранены:")
-    print(" - train_converted.feather")
-    print(" - train_converted.csv.gz")
-
-except Exception as e:
-    print(f"Ошибка при загрузке файла: {e}")
-    print("Пожалуйста, убедитесь, что ваш файл общедоступен по ссылке.")
+if __name__ == "__main__":
+    parse_search_results()

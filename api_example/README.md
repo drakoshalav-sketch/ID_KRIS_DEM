@@ -1,11 +1,9 @@
-# Пример работы с Pointpin API
+# Google Search API Example (searchapi.io)
 
-Pointpin API: https://pointp.in
+Демонстрация использования Google Search API для реального SERP scraping.  
+Скрипт отправляет запрос, получает органические результаты и сохраняет их в CSV.
 
-Pointpin предоставляет IP-геолокацию и локальные данные клиента.
+Для запуска необходимо получить API ключ на https://www.searchapi.io/.  
 
-Пример запуска:
+Запуск:  
 python api_reader.py
-
-Скрипт отправляет GET-запрос по адресу https://pointp.in/  
-Возвращает информацию о местоположении пользователя и сохраняет её в ip_geolocation.csv.
