@@ -15,5 +15,5 @@ def parse_ip_data(filename="ip_geolocation.csv"):
     parsed.to_csv("parsed_ip_data.csv", index=False)
     print("Файл parsed_ip_data.csv сохранён.")
 
-if name == "main":
+if __name__ == "__main__":
     parse_ip_data()
