@@ -1,9 +1,11 @@
-# Google Search API Example (searchapi.io)
+# API Example — Search Results via API
 
-Демонстрация использования Google Search API для реального SERP scraping.  
-Скрипт отправляет запрос, получает органические результаты и сохраняет их в CSV.
+Скрипт `api_reader.py` обращается к [searchapi.io](https://www.searchapi.io/documentation/google-search-api) и получает органические результаты поиска для запроса "chatgpt" из Google.
 
-Для запуска необходимо получить API ключ на https://www.searchapi.io/.  
+- Содержимое выводится через Pandas DataFrame.
+- Скриншот консольного вывода (см. ниже).
+- API-ключ указывается руками (в исходнике).
+- Данные сохраняются отдельно в search_results.csv, но сами данные не загружаются в репозиторий.
 
-Запуск:  
-python api_reader.py
+## API 
+- **Документация:** [searchapi.io Google API](https://www.searchapi.io/documentation/google-search-api)

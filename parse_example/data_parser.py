@@ -1,19 +1,19 @@
 import pandas as pd
+import os
 
-def parse_ip_data(filename="ip_geolocation.csv"):
-    df = pd.read_csv(filename)
-    print("Исходные данные:")
-    print(df.head())
-
-    # Пример простой фильтрации
-    columns = [col for col in df.columns if any(x in col.lower() for x in ["city", "country", "latitude", "longitude"])]
-    parsed = df[columns]
-
-    print("\nВыбранные ключевые поля:")
-    print(parsed)
-
-    parsed.to_csv("parsed_ip_data.csv", index=False)
-    print("Файл parsed_ip_data.csv сохранён.")
+def parse_and_show():
+    # Задаём относительный путь к csv из api_example
+    path = os.path.join("..", "api_example", "search_results.csv")
+    df = pd.read_csv(path, encoding="utf-8")
+    print("Размер датасета:", df.shape)
+    print("Заголовки:", df.columns.tolist())
+    print("\nПервые 5 строк:")
+    # Для красоты выводим только ключевые столбцы, если они есть
+    key_cols = [c for c in ["position", "title", "link", "snippet"] if c in df.columns]
+    if key_cols:
+        print(df[key_cols].head())
+    else:
+        print(df.head())
 
 if __name__ == "__main__":
-    parse_ip_data()
+    parse_and_show()
