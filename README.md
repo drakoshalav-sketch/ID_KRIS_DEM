@@ -114,9 +114,8 @@ python write_to_db.py
 
 Полный исследовательский анализ данных доступен в интерактивном формате:
 
-🔗 **[Посмотреть EDA ноутбук на nbviewer](https://nbviewer.org/github/ВАШ_USERNAME/ID_KRIS_DEM/blob/main/notebooks/EDA.ipynb)**
+🔗 **[Посмотреть EDA ноутбук на nbviewer](https://nbviewer.org/github/drakoshalav-sketch/ID_KRIS_DEM/blob/main/notebooks/EDA.ipynb)**
 
-> **Замените** `ВАШ_USERNAME` на ваш GitHub username
 
 ---
 
